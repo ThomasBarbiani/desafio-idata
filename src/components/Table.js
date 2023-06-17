@@ -1,4 +1,4 @@
-import {React, useEffect, useState} from "react"
+import {React, useEffect, useState, useRef} from "react"
 import {AgGridReact} from "ag-grid-react"
 
 import 'ag-grid-community/styles/ag-grid.css'; 
@@ -12,6 +12,8 @@ export const Table = () =>{
     const [processData, setProcessData] = useState(null);
     const [filterText, setFilterText] = useState('');
     const [pageSize, setPageSize] = useState(19);
+    const gridApiRef = useRef(null);
+
 
     // Pega os dados da API
     useEffect(() => {
@@ -26,7 +28,11 @@ export const Table = () =>{
 
     // Colunas da tabela
     const columns = [ 
-            {headerName: "id", field: 'id', width: "150px", checkboxSelection: true, headerCheckboxSelection: true},
+
+            {   
+                headerName: "id", field: 'id', width: "150px", checkboxSelection: true, 
+                headerCheckboxSelection: true, rowDrag: true
+            },
             
             {
                 headerName: 'Detalhes do Envio',
@@ -55,7 +61,8 @@ export const Table = () =>{
                 ],
             },
             
-            {headerName: "Fatura", field: 'fatura'},
+            {   headerName: "Fatura", field: 'fatura'},
+
             {
                 headerName: 'Datas',
                 children: [
@@ -72,7 +79,8 @@ export const Table = () =>{
         filter: true,
         floatingFilter: true,
         singleClickEdit: true,
-        suppressSpanHeaderHeight: true
+        suppressSpanHeaderHeight: true,
+        rowDragManaged:true
     }
 
     const rowSelectionType = 'multiple';
@@ -87,18 +95,43 @@ export const Table = () =>{
     const onFilterTextChange = (e) => {
         setFilterText(e.target.value); // Atualiza a tabela com o filtro
     };
+    
+    const onGridReady = (params) => {
+        gridApiRef.current = params.api; //Exportar tabela
+    };
+
+    const onExportClick = () => {
+        if (gridApiRef.current) {
+            gridApiRef.current.exportDataAsCsv(); //Exportar tabela
+        }
+    };
 
     // Atualiza a tabela com o filtro
-    const filteredData = processData ? processData.filter((item) =>
-        Object.values(item).some((value) =>
-            value && value.toString().toLowerCase().includes(filterText.toLowerCase())
-        )
+    const filteredData = processData
+    ? processData.filter((item) =>
+        Object.values(item).some((value) => value && value.toString().toLowerCase().includes(filterText.toLowerCase()))
         )
     : [];
 
+    // Permite arrastar linhas
+    const onRowDragEnd = (event) => {
+        const { overIndex, node } = event;
+        const draggedRowData = node.data;
+    
+        setProcessData((prevData) => {
+          const updatedData = [...prevData];
+          updatedData.splice(node.rowIndex, 1);
+          updatedData.splice(overIndex, 0, draggedRowData);
+          return updatedData;
+        });
+    };
+
     return(
         <div className='ag-theme-alpine'>
-            <Filter pageSize={pageSize} onPageSizeChange={onPageSizeChange} onFilterTextChange={onFilterTextChange} />
+            <Filter pageSize={pageSize} onPageSizeChange={onPageSizeChange} 
+                    onFilterTextChange={onFilterTextChange} 
+                    onExportClick={onExportClick}
+            />
             <AgGridReact 
                 rowData={filteredData} 
                 columnDefs={columns} 
@@ -108,6 +141,8 @@ export const Table = () =>{
                 pagination={true}
                 paginationPageSize={pageSize}
                 animateRows={true}
+                onGridReady={onGridReady}
+                onRowDragEnd={onRowDragEnd}
             >
             </AgGridReact>
         </div>
