@@ -1,9 +1,15 @@
 .App {
-  min-height: 100vh;
-  color: white;
-  padding: 80px 40px;
+  height: auto;
+  padding: 80px 80px;
+  margin-bottom: 120px;
 }
 
 .ag-theme-alpine{
     height: 900px;
+}
+
+@media (max-width: 560px) {
+  .App {
+    padding: 80px 10px;
+  }
 }

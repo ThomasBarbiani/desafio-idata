@@ -1,11 +1,16 @@
 import './App.css';
-import { Table } from './Table';
+import { Table } from './components/Table';
+import { Banner } from './components/Banner';
+
 
 function App() {
   
   return (
-    <div className="App"> 
-      <Table/>
+    <div>
+      <div className="App"> 
+        <Banner />
+        <Table />
+      </div>
     </div>
   );
 }
