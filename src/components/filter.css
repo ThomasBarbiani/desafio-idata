@@ -1,0 +1,23 @@
+.filter{
+    margin-right: 30px;
+
+}
+
+.filter.qtdLinhas{
+    width: 180px;
+    margin-right: 30px;
+}
+
+button{
+    width: 100%;
+}
+
+@media (max-width: 850px) {
+    .filter {
+        width: 90%;
+        margin-right: 0;
+    }
+    .filter.qtdLinhas{
+        width: 90%;
+    }
+}

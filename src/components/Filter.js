@@ -1,4 +1,5 @@
 import React from 'react';
+import "./filter.css";
 
 import { Box, FormControl, InputLabel, Select, MenuItem, 
          TextField, useMediaQuery, Button } from '@mui/material';
@@ -13,9 +14,9 @@ const Filter = ({ pageSize, onPageSizeChange, onFilterTextChange, onExportClick 
 
   return (
     <Box display={isScreenSmall ? 'block' : 'flex'} alignItems="center" marginBottom={2} spacing={2}>
-        <Box flexDirection="column">
+        <Box flexDirection="column" >
             <InputLabel>Quantidades de Linhas: </InputLabel>
-            <FormControl sx={{ width: 180, marginRight: 4 }}>
+            <FormControl className={'filter qtdLinhas'} >
             <Select value={pageSize} onChange={onPageSizeChange}>
                 <MenuItem value={19} selected>
                 20 linhas
@@ -25,11 +26,13 @@ const Filter = ({ pageSize, onPageSizeChange, onFilterTextChange, onExportClick 
             </Select>
             </FormControl>
         </Box>
-        <Box flexDirection="column" sx={{ marginRight: '30px' }}>
+        <Box flexDirection="column" marginRight={isScreenSmall ? '0px' : '30px'}>
             <InputLabel>Filtrar: </InputLabel>
-            <TextField id="outlined-required" placeholder="Filtre as informações..." type="search" onChange={onFilterTextChange} />
+            <TextField id="outlined-required" className={'filter fitro'} 
+                       placeholder="Filtre as informações..." type="search" onChange={onFilterTextChange} 
+            />
         </Box>
-        <Box flexDirection="column" sx={{ marginRight: '10px' }}>
+        <Box flexDirection="column">
             <DownloadButton onExportClick={onExportClick} />
         </Box>
         <Box sx={{ marginLeft: 'auto' }}>

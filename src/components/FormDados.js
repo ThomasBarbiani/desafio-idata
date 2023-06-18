@@ -3,7 +3,8 @@ import "./formDados.css";
 import InputDados from "./InputDados";
 import { Link} from "react-router-dom";
 
-import SubmitRegistro from "../hooks/postData";
+import SubmitRegistro from "../hooks/usePostData";
+
 
 const FormDados = () => {
     const [values, setValues] = useState({

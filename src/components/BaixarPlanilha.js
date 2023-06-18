@@ -13,6 +13,11 @@ const BaixarPlanilha = ({ onExportClick }) => {
     setOpenConfirmation(false);
   };
 
+  const handleClick = () => {
+    onExportClick();
+    handleConfirmationClose();
+  };
+
   return (
     <>
       <Button
@@ -37,7 +42,7 @@ const BaixarPlanilha = ({ onExportClick }) => {
               <Button onClick={handleConfirmationClose} color="primary">
                 Cancelar
               </Button>
-              <Button onClick={onExportClick} color="primary">
+              <Button onClick={handleClick} color="primary">
                 Baixar
               </Button>
           </DialogActions>
