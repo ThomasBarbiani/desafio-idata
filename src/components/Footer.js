@@ -5,7 +5,7 @@ export function Footer() {
 
   return (
     <footer style={{backgroundColor: "#527186", 
-                    marginTop: 'auto', height: 150, 
+                    marginTop: '180px', height: 150, 
                     color: 'white',  display: 'flex', 
                     justifyContent: 'center', 
                     alignItems: 'center', 

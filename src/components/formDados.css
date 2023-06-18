@@ -1,0 +1,67 @@
+.cadastro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    background-size: cover;
+    background-position: center;
+}
+  
+form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: rgb(235, 235, 235);
+    padding: 0px 60px;
+    border-radius: 10px;
+    width: 600px;
+}
+
+.title {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 20px; /* Adicione o espaçamento inferior desejado */
+}
+
+.button-group {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+}
+
+
+.cadastro button{
+    width: 90%;
+    height: 50px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    margin-right: 10px;
+}
+
+.cancel-button {
+    background-color: white;
+    color: #D97935;
+    border: 2px solid #D97935;
+}
+
+.cancel-link {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+}
+
+.submit-button {
+    background-color: #D97935;
+    color: white;
+    border: 2px solid #D97935;
+}

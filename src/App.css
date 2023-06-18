@@ -1,15 +1,20 @@
 .App {
   height: auto;
   padding: 80px 80px;
-  margin-bottom: 180px;
 }
 
 .ag-theme-alpine{
     height: 900px;
 }
 
+@media (max-width: 851px) {
+  .App {
+      margin-bottom: 300px;
+  }
+}
+
 @media (max-width: 560px) {
   .App {
-    padding: 80px 10px;
+      padding: 80px 10px;
   }
 }
